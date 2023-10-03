@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "687691367646",
+    "project_id": "chashmart-eb616",
+    "storage_bucket": "chashmart-eb616.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:687691367646:android:8cd385409bac3687c92e4f",
+        "android_client_info": {
+          "package_name": "com.example.chashmart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "687691367646-b8mu3eokue19o0veltt6jmacq1ue8967.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArEKekzBXgOu3wAzz60LI6LKa5e3TR57A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "687691367646-b8mu3eokue19o0veltt6jmacq1ue8967.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
