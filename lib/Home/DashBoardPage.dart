@@ -1,6 +1,6 @@
-import 'package:chashmart/ButterflyGlassesPage.dart';
-import 'package:chashmart/ProfilePage.dart';
-import 'package:chashmart/SunGlassesPage.dart';
+import 'package:chashmart/Glasses/ButterflyGlassesPage.dart';
+import 'package:chashmart/Home/ProfilePage.dart';
+import 'package:chashmart/Glasses/SunGlassesPage.dart';
 import 'package:flutter/material.dart';
 
 class Dashboard extends StatelessWidget {

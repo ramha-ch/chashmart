@@ -1,9 +1,9 @@
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:chashmart/AboutUsPage.dart';
-import 'package:chashmart/ProfilePage.dart';
-import 'package:chashmart/WelcomeScreen.dart';
+import 'package:chashmart/Home/AboutUsPage.dart';
+import 'package:chashmart/Home/ProfilePage.dart';
+import 'package:chashmart/View/WelcomeScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:chashmart/SignUpPage.dart';
+import 'package:chashmart/View/SignUpPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -68,12 +68,7 @@ class LoginScreen extends StatelessWidget {
       print('Login Error: $e');
     }
   }
-      // You can navigate to another page after successful login.
-  //     print("User logged in: ${userCredential.user?.email}");
-  //   } catch (e) {
-  //     print("Error logging in: $e");
-  //   }
-  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

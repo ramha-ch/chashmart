@@ -1,10 +1,10 @@
 import 'dart:ui';
-import 'package:chashmart/AboutUsPage.dart';
-import 'package:chashmart/DashBoardPage.dart';
-import 'package:chashmart/LoginPage.dart';
+import 'package:chashmart/Home/AboutUsPage.dart';
+import 'package:chashmart/Home/DashBoardPage.dart';
+import 'package:chashmart/View/LoginPage.dart';
 
-import 'package:chashmart/ReviewRateApp.dart';
-import 'package:chashmart/SignUpPage.dart';
+import 'package:chashmart/Home/ReviewRateApp.dart';
+import 'package:chashmart/View/SignUpPage.dart';
 import 'package:flutter/material.dart';
 
 class welcomeScreen extends StatelessWidget {

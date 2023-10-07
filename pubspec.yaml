@@ -80,12 +80,9 @@ flutter:
   assets:
       - assets/logo.ico
       - assets/namelogo.png
-      - assets/logo.PNG
       - assets/google.png
       - assets/facebook.PNG
       - assets/twitter.PNG
-      - assets/test.gif
-      - assets/profile.jpg
       - assets/rate.PNG
       - assets/face.gif
       - assets/eye.gif
@@ -105,8 +102,7 @@ flutter:
       - assets/BG3.PNG
       - assets/BG4.PNG
       - assets/BG5.PNG
-      -  assets/BGmain.jpg
-      -  assets/BGmain2.jpg
+
 
 
 

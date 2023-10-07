@@ -1,9 +1,10 @@
-import 'package:chashmart/EditProfile.dart';
-import 'package:chashmart/ReviewRateApp.dart';
-import 'package:chashmart/WelcomeScreen.dart';
+import 'package:chashmart/Home/DashBoardPage.dart';
+import 'package:chashmart/Profile/EditProfile.dart';
+import 'package:chashmart/Home/ReviewRateApp.dart';
+import 'package:chashmart/View/WelcomeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:chashmart/AboutUsPage.dart';
+import 'package:chashmart/Home/AboutUsPage.dart';
 import 'dart:ui';
 
 
@@ -201,7 +202,10 @@ backgroundColor: Colors.white,
 
                   onTap: () {
                     // Handle home tap
-
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Dashboard(userID: widget.userID)),
+                    );
                   },
                 ),
 
@@ -277,10 +281,7 @@ backgroundColor: Colors.white,
                   ),
 
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ReviewPage(userID: widget.userID)),
-                    );
+
                   },
                 ),
 
@@ -296,7 +297,10 @@ backgroundColor: Colors.white,
                   ),
 
                   onTap: () {
-
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ReviewPage(userID: widget.userID)),
+                    );
                   },
                 ),
               ],
@@ -313,7 +317,12 @@ backgroundColor: Colors.white,
                 ZoomIconButton(
                   icon: Icons.home,
                   onPressed: () {
-                    // Handle home button press
+                    // Navigate to the DashboardPage when the button is pressed.
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => Dashboard(userID: widget.userID), // Use widget.userID
+                      ),
+                    );
                   },
                 ),
                 ZoomIconButton(
