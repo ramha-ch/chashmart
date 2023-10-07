@@ -77,9 +77,9 @@ class _GlassesPageState extends State<GlassesPage> {
   int currentIndex = 0;
 
   List<String> images = [
-    "assets/mainvedio.gif",
-    "assets/pic2.jpg",
-    "assets/pic1.PNG",
+    "assets/home/mainvedio.gif",
+    "assets/home/pic2.jpg",
+    "assets/home/pic1.PNG",
   ];
 
   List<String> glassTypes = [
@@ -92,12 +92,12 @@ class _GlassesPageState extends State<GlassesPage> {
   ];
 
   List<String> glassImages = [
-    "assets/sunglasses.PNG",
-    "assets/3D.gif",
-    "assets/roundglasses.PNG",
-    "assets/squareglasses.PNG",
-    "assets/butterflyglasses.PNG",
-    "assets/polygonglasses.PNG",
+    "assets/Glasses/sun/sunglasses.PNG",
+    "assets/Glasses/3D/3D.gif",
+    "assets/Glasses/round/roundglasses.PNG",
+    "assets/Glasses/square/squareglasses.PNG",
+    "assets/Glasses/Butterfly/butterflyglasses.PNG",
+    "assets/Glasses/polygon/polygonglasses.PNG",
   ];
 
   @override
@@ -155,9 +155,7 @@ class _GlassesPageState extends State<GlassesPage> {
                     (index) {
                   return GestureDetector(
                     onTap: () {
-                      // Handle glasses selection
-                      // You can navigate to the respective page for each glass type here.
-                      if (glassTypes[index] == "Sun Glasses") {
+                       if (glassTypes[index] == "Sun Glasses") {
                         Navigator.push(
                           context,
                           MaterialPageRoute(

@@ -36,7 +36,7 @@ class SignUpScreen extends StatelessWidget {
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage('assets/namelogo.png'),
+                    image: AssetImage('assets/View/namelogo.png'),
                   ),
                 ),
               ),
@@ -244,7 +244,7 @@ class SignUpScreen extends StatelessWidget {
                             primary: Colors
                                 .white, // Set your desired background color here
                           ),
-                          icon: Image.asset('assets/google.png',
+                          icon: Image.asset('assets/View/google.png',
                               height: 50, width: 50),
                           label: Text(''),
                         ),
@@ -257,7 +257,7 @@ class SignUpScreen extends StatelessWidget {
                             primary: Colors
                                 .white, // Set your desired background color here
                           ),
-                          icon: Image.asset('assets/facebook.PNG',
+                          icon: Image.asset('assets/View/facebook.PNG',
                               height: 50, width: 50),
                           label: Text(''),
                         ),
@@ -270,7 +270,7 @@ class SignUpScreen extends StatelessWidget {
                             primary: Colors
                                 .white, // Set your desired background color here
                           ),
-                          icon: Image.asset('assets/twitter.PNG',
+                          icon: Image.asset('assets/View/twitter.PNG',
                               height: 50, width: 50),
                           label: Text(''),
                         ),

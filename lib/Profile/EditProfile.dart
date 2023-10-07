@@ -14,8 +14,8 @@ class EditProfilePage extends StatefulWidget {
 
 class _EditProfilePageState extends State<EditProfilePage> {
   String _name = '';
-  String _email = ''; // Added _email state variable
-  String _password = ''; // Added _password state variable
+  String _email = '';
+  String _password = '';
   final firebase_storage.FirebaseStorage _storage =
       firebase_storage.FirebaseStorage.instance;
 

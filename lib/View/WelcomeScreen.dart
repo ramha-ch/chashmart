@@ -27,7 +27,7 @@ class welcomeScreen extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20 , ),
                 child: Image.asset(
-                  'assets/logo.ico',
+                  'assets/View/logo.jpg',
                   width: 300,
                   height: 300,
                 ),

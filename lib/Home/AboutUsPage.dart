@@ -11,9 +11,9 @@ class AboutUsPage extends StatefulWidget {
 class _AboutUsPageState extends State<AboutUsPage> {
   int _currentIndex = 0;
   List<String> imageList = [
-    "assets/test.gif",
-    "assets/face.gif",
-    "assets/eye.gif",
+    "assets/aboutUs/test.gif",
+    "assets/aboutUs/face.gif",
+    "assets/aboutUs/eye.gif",
   ];
 
   List<String> imageCaptions = [

@@ -78,30 +78,33 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-      - assets/logo.ico
-      - assets/namelogo.png
-      - assets/google.png
-      - assets/facebook.PNG
-      - assets/twitter.PNG
-      - assets/rate.PNG
-      - assets/face.gif
-      - assets/eye.gif
-      - assets/update.gif
-      - assets/3D.gif
-      - assets/pic1.PNG
-      - assets/mainvedio.gif
-      - assets/roundglasses.PNG
-      - assets/pic2.jpg
-      - assets/sunglasses.PNG
-      - assets/squareglasses.PNG
-      - assets/butterflyglasses.PNG
-      - assets/polygonglasses.PNG
-      - assets/BG0.PNG
-      - assets/BG1.PNG
-      - assets/BG2.PNG
-      - assets/BG3.PNG
-      - assets/BG4.PNG
-      - assets/BG5.PNG
+
+      - assets/View/namelogo.png
+      - assets/View/logo.jpg
+      - assets/View/google.png
+      - assets/View/facebook.PNG
+      - assets/View/twitter.PNG
+      - assets/home/rate.PNG
+      - assets/home/update.gif
+      - assets/home/pic1.PNG
+      - assets/home/mainvedio.gif
+      - assets/aboutUs/test.gif
+      - assets/aboutUs/face.gif
+      - assets/aboutUs/eye.gif
+      - assets/Glasses/3D/3D.gif
+
+      - assets/Glasses/round/roundglasses.PNG
+      - assets/home/pic2.jpg
+      - assets/Glasses/sun/sunglasses.PNG
+      - assets/Glasses/Butterfly/butterflyglasses.PNG
+      - assets/Glasses/square/squareglasses.PNG
+      - assets/Glasses/polygon/polygonglasses.PNG
+      - assets/Glasses/Butterfly/BG0.PNG
+      - assets/Glasses/Butterfly/BG1.PNG
+      - assets/Glasses/Butterfly/BG2.PNG
+      - assets/Glasses/Butterfly/BG3.PNG
+      - assets/Glasses/Butterfly/BG4.PNG
+      - assets/Glasses/Butterfly/BG5.PNG
 
 
 
