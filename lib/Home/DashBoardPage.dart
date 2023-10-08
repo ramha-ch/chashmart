@@ -2,7 +2,7 @@ import 'package:chashmart/Glasses/ButterflyGlassesPage.dart';
 import 'package:chashmart/Home/ProfilePage.dart';
 import 'package:chashmart/Glasses/SunGlassesPage.dart';
 import 'package:flutter/material.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 class Dashboard extends StatelessWidget {
   final String userID;
 
@@ -67,7 +67,7 @@ class _ZoomIconButtonState extends State<ZoomIconButton> {
 
 class GlassesPage extends StatefulWidget {
   final String userID; // Add a member variable to store the userID
-
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   GlassesPage({required this.userID});
   @override
   _GlassesPageState createState() => _GlassesPageState();
@@ -233,11 +233,11 @@ class _GlassesPageState extends State<GlassesPage> {
                   icon: Icons.person,
                   
                     onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(builder: (context) => ProfilePageScreen()),
-                      // );
-                    // Handle profile button press
+                      Navigator.push(
+                       context,
+                       MaterialPageRoute(builder: (context) => ProfilePageScreen(userID: widget.userID)),
+                       );
+
                   },
                 ),
                 ZoomIconButton(

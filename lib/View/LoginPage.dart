@@ -1,3 +1,4 @@
+import 'package:chashmart/Home/DashBoardPage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:chashmart/Home/AboutUsPage.dart';
 import 'package:chashmart/Home/ProfilePage.dart';
@@ -11,61 +12,42 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'SignInGoogle.dart';
 final FirebaseAuth auth = FirebaseAuth.instance;
-
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 final _formKey = GlobalKey<FormState>();
 
-class Utilities{
-  void show_Message(var message){
-
-    Fluttertoast.showToast(
-        msg: message,
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: const Color.fromARGB(255, 76, 98, 109),
-        textColor: Colors.white,
-        fontSize: 16.0
-    );
-  }
-}
 
 class LoginScreen extends StatelessWidget {
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final DatabaseReference _userRef = FirebaseDatabase.instance.reference().child("Customers");
-  final CollectionReference usersCollection = FirebaseFirestore.instance.collection("Customers");
   final _formKey = GlobalKey<FormState>();
 
+  Future<void> _loginWithEmailAndPassword(BuildContext context) async {
+    if (_formKey.currentState!.validate()) {
+      try {
+        UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+          email: emailController.text,
+          password: passwordController.text,
+        );
 
-  Future<void> _login() async {
-    String email = emailController.text.trim();
-    String password = passwordController.text;
-
-    try {
-      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-
-      if (userCredential.user != null) {
-        // Authentication successful, fetch customer data from Firestore.
-        DocumentSnapshot customerSnapshot = await FirebaseFirestore.instance
-            .collection('Customers')
-            .doc(userCredential.user!.email) // Assuming UID is used as the document ID
-            .get();
-
-        if (customerSnapshot.exists) {
-          // You can use the customer data as needed.
-          print('Customer Data: ');
-        } else {
-          print('Customer data not found.');
+        if (userCredential.user != null) {
+          // User is logged in, navigate to the dashboard screen.
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) =>
+                Dashboard(userID: _auth.currentUser!.uid),
+          ));
         }
+      } catch (e) {
+        print('Login Error: $e');
+        // Handle login error and show an error message to the user.
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Login failed. Please check your email and password.'),
+          ),
+        );
       }
-    } catch (e) {
-      print('Login Error: $e');
     }
   }
 
@@ -213,41 +195,10 @@ class LoginScreen extends StatelessWidget {
                           ),
                           SizedBox(height: 30),
                           ElevatedButton(
-                            onPressed: () async {
-                              if (_formKey.currentState!.validate()) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('Logging in...')),
-                                );
+                              onPressed: () async {
+                                await _loginWithEmailAndPassword(context);
+                              },
 
-                                try {
-                                  await _auth.signInWithEmailAndPassword(
-                                    email: emailController.text.trim(),
-                                    password: passwordController.text,
-                                  );
-
-                                  // Get user ID from Firestore based on email
-                                  // Assuming you have a field called "email" in Firestore
-                                  var querySnapshot = await FirebaseFirestore.instance
-                                      .collection("Customers")
-                                      .where("email", isEqualTo: emailController.text)
-                                      .get();
-                                  if (querySnapshot.docs.isNotEmpty) {
-                                    var userID = querySnapshot.docs[0].id;
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => ProfilePageScreen(userID: userID),
-                                      ),
-                                    );
-                                  }
-                                } catch (error) {
-                                  print("Login error: $error");
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text('Login failed.')),
-                                  );
-                                }
-                              }
-                            },
                             style: ElevatedButton.styleFrom(
                               primary: Color(0xFF183765),
                               minimumSize: Size(330, 55),
@@ -259,6 +210,7 @@ class LoginScreen extends StatelessWidget {
                                 fontSize: 18,
                               ),
                             ),
+
                           ),
                           SizedBox(height: 40),
                           Text("- Or sign in with -"),

@@ -43,13 +43,19 @@ class _EditProfilePageState extends State<EditProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+
           children: [
 
-            SizedBox(height: 16),
+            SizedBox(height: 156),
+            Image.asset(
+              'assets/home/update.gif',
+              width: 300,
+              height: 300,
+            ),
     SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -73,12 +79,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   ],
                 ),
                  child:  TextFormField(
-                    style: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF183765),
-                    ),
-                    decoration: InputDecoration(labelText: 'Name'),
+                   style: const TextStyle(
+                     fontSize: 15,
+                     fontWeight: FontWeight.bold,
+                     color: Color(0xFF183765),
+                   ),
+                   decoration: const InputDecoration(
+                     labelText: 'Name',
+
+                     border: InputBorder.none,
+                   ),
                     onChanged: (value) {
                       setState(() {
                         _name = value;
@@ -90,6 +100,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 ),
               ),
 
+            SizedBox(height: 16),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: Container(
@@ -111,13 +122,18 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     ),
                   ],
                 ),
-                child:  TextFormField(
+                child: TextFormField(
+
                   style: const TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
                     color: Color(0xFF183765),
                   ),
-                  decoration: InputDecoration(labelText: 'Email'),
+                  decoration: const InputDecoration(
+                    labelText: 'Email',
+
+                    border: InputBorder.none,
+                  ),
                   onChanged: (value) {
                     setState(() {
                       _email = value;
@@ -129,7 +145,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               ),
             ),
 
-
+            SizedBox(height: 16),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: Container(
@@ -157,7 +173,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     fontWeight: FontWeight.bold,
                     color: Color(0xFF183765),
                   ),
-                  decoration: InputDecoration(labelText: 'Password'),
+                  decoration: const InputDecoration(
+                    labelText: 'Password',
+
+                    border: InputBorder.none,
+                  ),
                   onChanged: (value) {
                     setState(() {
                       _password = value;

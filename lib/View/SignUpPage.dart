@@ -197,28 +197,46 @@ class SignUpScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 30),
-                    ElevatedButton(
-                      onPressed: () async {
-                        if (_formKey.currentState!.validate()) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Processing Data')),
-                          );
+            ElevatedButton(
+              onPressed: () async {
+                if (_formKey.currentState!.validate()) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Processing Data')),
+                  );
 
-                          var userID = Random().nextInt(1000).toString();
-                          await usersCollection.doc(userID).set({
-                            "id": userID,
-                            "name": _nameController.value.text,
-                            "email": _emailController.value.text,
-                            "password": _passwordController.value.text,
-                          });
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => Dashboard(userID: userID)),
-                          );
+                  try {
+                    // Create the user in Firebase Authentication
+                    UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                      email: _emailController.value.text,
+                      password: _passwordController.value.text,
+                    );
 
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
+                    // Get the newly created user's ID
+                    var userID = userCredential.user!.uid;
+
+                    // Store additional user data in Firestore
+                    await FirebaseFirestore.instance.collection('Customers').doc(userID).set({
+                      "id": userID,
+                      "name": _nameController.value.text,
+                      "email": _emailController.value.text,
+                      // Don't store the password in Firestore for security reasons
+                    });
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Dashboard(userID: userID)),
+                    );
+                  } catch (error) {
+                    // Handle any errors that occurred during user creation or Firestore write
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Error: $error')),
+                    );
+                  }
+                }
+              },
+
+
+            style: ElevatedButton.styleFrom(
                         primary: Color(0xFF183765),
                         minimumSize: Size(330, 55),
                       ),
