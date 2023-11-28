@@ -1,6 +1,8 @@
 import 'dart:ui';
 import 'package:chashmart/Home/AboutUsPage.dart';
 import 'package:chashmart/Home/DashBoardPage.dart';
+import 'package:chashmart/Support/help.dart';
+import 'package:chashmart/Support/livechat.dart';
 import 'package:chashmart/View/LoginPage.dart';
 
 import 'package:chashmart/Home/ReviewRateApp.dart';
@@ -52,7 +54,7 @@ class welcomeScreen extends StatelessWidget {
               child: Text(
                 'Sign Up',
                 style: TextStyle(
-                  color: Color(0xFF183765),
+                  color: Colors.black,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),

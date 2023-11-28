@@ -107,6 +107,7 @@ class SignUpScreen extends StatelessWidget {
                               ),
                             ),
                           ),
+                          SizedBox(height: 10),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 30),
                             child: Container(
@@ -256,7 +257,8 @@ class SignUpScreen extends StatelessWidget {
                       children: [
                         ElevatedButton.icon(
                           onPressed: () async {
-
+                            GoogleSignUpHelper googleSignUpHelper = GoogleSignUpHelper();
+                            UserCredential? userCredential = await googleSignUpHelper.signUpWithGoogle();
                           },
                           style: ElevatedButton.styleFrom(
                             primary: Colors
@@ -272,12 +274,16 @@ class SignUpScreen extends StatelessWidget {
                             // TODO: Add onPressed logic for Facebook sign-in
                           },
                           style: ElevatedButton.styleFrom(
-                            primary: Colors
-                                .white, // Set your desired background color here
+                            primary: Colors.transparent, // Set background color to transparent
+                            shadowColor: Colors.white, // Remove shadow
+                            padding: EdgeInsets.zero, // Remove default padding
                           ),
-                          icon: Image.asset('assets/View/facebook.PNG',
-                              height: 50, width: 50),
-                          label: Text(''),
+                          icon: Image.asset(
+                            'assets/View/facebook.PNG',
+                            height: 50,
+                            width: 50,
+                          ),
+                          label: Text(''), // Set an empty label to hide text
                         ),
                         SizedBox(width: 14),
                         ElevatedButton.icon(
@@ -285,8 +291,8 @@ class SignUpScreen extends StatelessWidget {
                             // TODO: Add onPressed logic for Twitter sign-in
                           },
                           style: ElevatedButton.styleFrom(
-                            primary: Colors
-                                .white, // Set your desired background color here
+                            primary: Colors.white, // Set your desired background color here// Remove shadow
+                            padding: EdgeInsets.zero, // Set your desired background color here
                           ),
                           icon: Image.asset('assets/View/twitter.PNG',
                               height: 50, width: 50),

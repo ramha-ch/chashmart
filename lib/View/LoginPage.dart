@@ -1,16 +1,11 @@
 import 'package:chashmart/Home/DashBoardPage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:chashmart/Home/AboutUsPage.dart';
 import 'package:chashmart/Home/ProfilePage.dart';
-import 'package:chashmart/View/WelcomeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:chashmart/View/SignUpPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'package:firebase_database/firebase_database.dart';
-import 'SignInGoogle.dart';
 final FirebaseAuth auth = FirebaseAuth.instance;
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 final _formKey = GlobalKey<FormState>();
@@ -32,11 +27,12 @@ class LoginScreen extends StatelessWidget {
         );
 
         if (userCredential.user != null) {
+          var userID = userCredential.user!.uid;
           // User is logged in, navigate to the dashboard screen.
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) =>
-                Dashboard(userID: _auth.currentUser!.uid),
+                Dashboard(userID: userID),
           ));
         }
       } catch (e) {
@@ -224,8 +220,6 @@ class LoginScreen extends StatelessWidget {
                                   UserCredential? userCredential = await googleSignUpHelper.signUpWithGoogle();
 
                                   if (userCredential != null) {
-                                    // Handle successful sign-up here, e.g., navigate to the next screen.
-                                    // You can replace the below code with your navigation logic.
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(

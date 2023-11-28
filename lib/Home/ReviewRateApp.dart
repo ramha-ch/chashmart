@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ReviewPage extends StatefulWidget {
-  final String userID;
-  ReviewPage({required this.userID});
-
   @override
   _ReviewPageState createState() => _ReviewPageState();
 }
-
 
 class _ReviewPageState extends State<ReviewPage> {
   final _commentController = TextEditingController();
   double _userRating = 0;
 
-  List<String> chasmartLetters = ['C', 'CH', 'CHA', 'CHAS', 'CHASH', 'CHASHM', 'CHASHMA', 'CHASMAR','CHASMART'];
+  List<String> chasmartLetters = ['C', 'CH', 'CHA', 'CHAS', 'CHASH', 'CHASHM', 'CHASHMA', 'CHASMAR', 'CHASMART'];
   int currentIndex = 0;
 
   @override
@@ -22,9 +19,8 @@ class _ReviewPageState extends State<ReviewPage> {
     super.initState();
     _startDisplay();
   }
-
   void _startDisplay() {
-    Future.delayed(Duration(seconds: 1), () {
+    Future.delayed(Duration(milliseconds: 500), () {
       if (currentIndex < chasmartLetters.length - 1) {
         setState(() {
           currentIndex++;
@@ -34,38 +30,69 @@ class _ReviewPageState extends State<ReviewPage> {
     });
   }
 
-  void _submitReview(String userID, String review, double rating) async {
-    try {
-      await FirebaseFirestore.instance
-          .collection('Customers')
-          .doc(userID)
-          .collection('reviews')
-          .add({
-        'review': review,
-        'rating': rating,
-        'timestamp': FieldValue.serverTimestamp(),
-      });
+  void _showDialog(String title, String content) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(content),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text('Review Submitted'),
-            content: Text('Thank you for submitting your review!'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text('OK'),
-              ),
-            ],
-          );
-        },
-      );
+  void _submitReview(String review, double rating) async {
+    try {
+      User? currentUser = FirebaseAuth.instance.currentUser;
+
+      if (currentUser != null) {
+        await FirebaseFirestore.instance
+            .collection('Customers')
+            .doc(currentUser.uid)
+            .collection('reviews')
+            .add({
+          'review': review,
+          'rating': rating,
+          'timestamp': FieldValue.serverTimestamp(),
+        });
+
+        _showDialog('Review Submitted', 'Thank you for submitting your review!');
+      } else {
+        _showDialog('Error', 'There was an error submitting your review. Please try again later. User is null.');
+      }
     } catch (error) {
       print('Error submitting review: $error');
+      _showDialog('Error', 'There was an error submitting your review. Please try again later.');
     }
+  }
+
+  void _showErrorDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Error'),
+          content: Text('There was an error submitting your review. Please try again later.'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -81,17 +108,18 @@ class _ReviewPageState extends State<ReviewPage> {
       body: Center(
         child: Column(
           children: [
-
             SizedBox(height: 70),
             Text(
               chasmartLetters[currentIndex],
-              style: TextStyle(fontSize: 35,
+              style: TextStyle(
+                fontSize: 35,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF183765),),
+                color: Color(0xFF183765),
+              ),
             ),
             Container(
               height: 270,
-              width: 350, // Specify the desired height
+              width: 350,
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 image: DecorationImage(
@@ -99,9 +127,9 @@ class _ReviewPageState extends State<ReviewPage> {
                 ),
               ),
             ),
-            SizedBox(height: 30),
+
             Padding(
-              padding: const EdgeInsets.only(left: 30),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -114,12 +142,10 @@ class _ReviewPageState extends State<ReviewPage> {
                 ),
               ),
             ),
-            // Rating Stars
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-
                 children: [
                   for (int i = 1; i <= 5; i++)
                     GestureDetector(
@@ -130,7 +156,7 @@ class _ReviewPageState extends State<ReviewPage> {
                       },
                       child: Icon(
                         Icons.star,
-                        color: i <= _userRating ? Color(0xFF183765) : Colors.grey, // Change the star color here
+                        color: i <= _userRating ? Color(0xFF183765) : Colors.grey,
                         size: 40,
                       ),
                     ),
@@ -138,7 +164,7 @@ class _ReviewPageState extends State<ReviewPage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 30),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -151,7 +177,6 @@ class _ReviewPageState extends State<ReviewPage> {
                 ),
               ),
             ),
-            // Comment Box
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: TextFormField(
@@ -163,34 +188,15 @@ class _ReviewPageState extends State<ReviewPage> {
                 ),
               ),
             ),
-            // ... rest of your UI ...
-
             ElevatedButton(
               onPressed: () {
                 if (_userRating > 0) {
                   _submitReview(
-                    widget.userID,
                     _commentController.text,
                     _userRating,
                   );
                 } else {
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: Text('Rating Error'),
-                        content: Text('Please select a rating before submitting.'),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: Text('OK'),
-                          ),
-                        ],
-                      );
-                    },
-                  );
+                  _showRatingErrorDialog();
                 }
               },
               style: ElevatedButton.styleFrom(
@@ -202,6 +208,26 @@ class _ReviewPageState extends State<ReviewPage> {
           ],
         ),
       ),
+    );
+  }
+
+  void _showRatingErrorDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Rating Error'),
+          content: Text('Please select a rating before submitting.'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
     );
   }
 }

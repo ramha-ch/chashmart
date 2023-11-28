@@ -179,7 +179,7 @@ backgroundColor: Colors.white,
                   onTap: () async {
                     await Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => EditProfilePage(userID: widget.userID)),
+                      MaterialPageRoute(builder: (context) => EditProfilePage()),
                     );
                     // Refresh user data after returning from EditProfilePage
                     setState(() {});
@@ -299,7 +299,7 @@ backgroundColor: Colors.white,
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ReviewPage(userID: widget.userID)),
+                      MaterialPageRoute(builder: (context) => ReviewPage()),
                     );
                   },
                 ),

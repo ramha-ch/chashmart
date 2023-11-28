@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 class Dashboard extends StatelessWidget {
   final String userID;
-
   Dashboard({required this.userID});
+
 
   @override
   Widget build(BuildContext context) {
@@ -101,11 +101,28 @@ class _GlassesPageState extends State<GlassesPage> {
   ];
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+  Widget build(BuildContext context) {return Scaffold(
+    appBar: AppBar(
+      backgroundColor: Colors.white,
+      leading: Row(
+        children: [
+          IconButton(
+            icon: Icon(Icons.menu, size: 40, color: Color(0xFF183765)),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ProfilePageScreen(userID: widget.userID),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+    ),
       body: Column(
         children: [
-          SizedBox(height: 10),
+
           // Top Images Carousel
           Container(
             height: 320,
@@ -229,9 +246,11 @@ class _GlassesPageState extends State<GlassesPage> {
                     // Handle home button press
                   },
                 ),
+
                 ZoomIconButton(
+
                   icon: Icons.person,
-                  
+
                     onPressed: () {
                       Navigator.push(
                        context,
@@ -243,7 +262,7 @@ class _GlassesPageState extends State<GlassesPage> {
                 ZoomIconButton(
                   icon: Icons.share,
                   onPressed: () {
-                    // Handle share button press
+
                   },
                 ),
                 ZoomIconButton(
